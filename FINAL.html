@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <title>Alumination</title>
+    <style>
+        /* Your existing CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #0B0B0D;
+            color: #F8E9D2;
+            overflow-x: hidden;
+            width: 100%;
+        }    
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffac66;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            max-width: 100vw;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        #background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .logo-left, .logo-right {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+        .logo-right{
+            height: 8vh;
+            padding-right: 20px;
+        }
+        .logo-left{
+            height: 8vh;
+            padding-left: 20px;
+        }
+
+        .alum {
+            margin-top: 10px;
+            height: 100%;
+            width: 80%;
+            display: block; /* Add this */
+            margin-left: auto; /* Add this */
+            margin-right: auto; /* Add this */
+}
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: bold;
+            position: relative;
+        }
+        .body-logo {
+            font-size: 4.5rem;
+            font-weight: bold;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            margin-top:-60px;
+            padding-right: 4%;
+            font-family: cinzel;
+        }
+        .present-logo{
+            font-size: 2rem;
+            font-weight: bold;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            margin-top: 20px;
+            margin-bottom: 6%;
+            padding-right: 3.3%;
+            font-family: pacifico;
+        }
+
+        .down-arrow {
+            position: absolute;
+            bottom: 60px;
+            font-size: 24px;
+            animation: bounce 1.5s infinite;
+            transition: opacity 0.3s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .events-container {
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Added to center all child elements */
+            width: 100%;
+            box-sizing: border-box; /* Added for better sizing */
+        }
+        .event-box {
+            background-color:transparent;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            min-height: 150px;
+            border-radius: 10px;
+            border: 2px solid #F8E9D2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .event-box:hover {
+            background-color: #ffac66;
+        }
+        .event-logo {
+            max-height: 100px;
+            width: 50%;
+            height: auto;
+        }
+        .event-details {
+            flex-grow: 1;
+            padding-left: 20px;
+            text-align: left;
+        }
+        #alumination {
+            width: 50%;
+            opacity: 0;
+            transform: scale(0.3);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+        
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            background: transparent;
+            display: none;
+            z-index: 1000;
+            transition: display 0.5s ease-out;
+          }
+          
+          .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #0B0B0D;
+            color: #F8E9D2;
+            padding: 20px;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(242, 242, 18, 0.2);
+            display: none;
+            z-index: 1001;
+            transition: display 0.5s ease-out;
+          }
+          
+          .popup-content {
+            text-align: center;
+          }
+          
+          .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+          }
+          .register{
+            height: 22%;
+            width: 15%;
+            border: none;
+            border-radius: 5px;
+            background-color: transparent ;
+            color: #ffac66;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          p{
+            letter-spacing: 0.7px;
+            word-spacing: 0.7px;
+          }
+          .s-logo{
+            width: 50vw;
+            height: 100%;
+          }
+          .m-pic{
+            width: 100%;
+            min-height: 10vh;
+          }
+          #event-name{
+            font-size: 3.5rem;
+          }
+
+          /* New responsive logo styles */
+          @media (max-width: 768px) {
+            .logo-left, .logo-right {
+                height: 50px;
+            }
+            
+            .logo-right {
+                height: 6vh;
+                padding-right: 10px;
+            }
+            
+            .logo-left {
+                height: 6vh;
+                padding-left: 10px;
+            }
+          }
+
+          @media (max-width: 500px) {
+            .popup{
+                width: 95%;
+                max-width: 290px;
+                max-height: 600px;
+            }
+            .register{
+                width: 32%;
+            }
+            .body-logo{
+                font-size: 2.7rem;
+                padding-left: 8%;
+            }
+            .present-logo{
+                font-size: 1.5rem;
+                padding-left: 7%;
+            }
+            .alum {
+                width: 90%; /* Slightly larger on mobile */
+                padding-left: 0; /* Remove the left padding */
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .m-pic{
+                width: 100%;
+                min-height: 7vh;
+            }
+            .s-logo{
+                width: 60vw;
+            }
+            
+            /* Fix for event box centering on mobile */
+            .event-box {
+                width: 90%; /* Slightly wider on mobile */
+                margin: 15px auto; /* Consistent margin */
+                padding: 15px; /* Slightly less padding */
+            }
+          
+          }
+          @media(min-width:750px) and (max-width:1000px){
+            .alum{
+                padding-left: 4%;
+            }
+          }
+          @media(min-width:500px) and (max-width:800px){
+            .alum {
+                padding-left: 0; /* Remove left padding */
+                margin-left: auto;
+                margin-right: auto;
+            }
+            }
+            .body-logo{
+                font-size: 2.6rem;
+                padding-left: 5%;
+            }
+            .present-logo{
+                font-size: 1.5rem;
+                padding-left: 4%;
+            }
+            .m-pic{
+                min-height: 8vh;
+            }
+            
+            /* Adjust event boxes for medium screens */
+            .event-box {
+                width: 85%;
+            }
+          @media(min-width:800px) and (max-width:1050px){
+            .alum{
+                width: 90%;
+            }
+            .body-logo{
+                padding-left: 5%;
+            }
+            .present-logo{
+                padding-left: 4%;
+            }
+          }
+          @media(min-width:500px) and (max-width:750px){
+            .alum{
+                padding-left: 6%;
+            }
+          }
+          @media (min-width:500px) and (max-width:1200px){
+            .register{
+                width: 30%;
+            }
+            .popup{
+                width: 90%;
+                max-width: 550px;
+            }
+          }  
+          @media (min-width:1200px) and (max-width:2000px){
+            .register{
+                width: 15%;
+                
+            }
+            .popup{
+                width: 90%;
+                max-width: 870px;
+
+            }
+            .logo-right{
+                width: auto;
+            }
+          }
+    </style>
+</head>
+<body>
+
+    <video id="background-video" autoplay muted loop>
+        <source src="gold star 2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <header>
+        <!-- Left Logo -->
+        <img src="saic colourchanging logo black.png" alt="Left Logo" class="logo-left">
+        <!-- Right Logo -->
+        <img src="WHITE LOGO 2.O.png" alt="Right Logo" class="logo-right">
+    </header>
+    <!-- Rest of your HTML content -->
+
+    <div class="container" id="landing">
+        <div class="body-logo" id="body-logo">SAI CELL</div>
+        <div class="present-logo">PRESENTS</div>
+        <div id="alumination">
+            <img src="sticker 1(alumination logo).png" alt="Alumination" class="alum">
+        </div>
+        <div class="down-arrow">&#x2193;</div>
+    </div>
+    <div id="overlay"></div>
+
+    <div id="Master_talk_discription" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Master's Talk</h2>
+            <p>The Masters' Talk is a thought-provoking session where distinguished alumni share their career trajectories, industry expertise, and personal insights. These accomplished professionals who have excelled in fields ranging from technology to  business to research and policymaking, offer students a rare opportunity to learn from their experiences. Through candid discussions, they provide guidance on career growth, industry trends, and the challenges they had faced while offering valuable lessons that can shape the students' professional journeys. The session forma an excellent platform for students to seek mentorship, ask questions, and expand their professional network by connecting with industry veterans who once walked the same halls of NIT Durgapur.
+            </p>
+            <!-- <a href="https://forms.gle/fo9KXY87kA5g1wZ69" target="_blank"><button class="register">REGISTER NOW</button></a> -->
+        </div>
+    </div>
+    
+    <div id="Ideathon_discription" class="popup" >
+      <div class="popup-content">
+          <span class="close-btn" onclick="closePopup()">&times;</span>
+          <h2>Ideathon</h2>
+          <p>The Ideathon is an electrifying competition that fosters creativity, problem-solving, and entrepreneurial thinking. Participants will pitch innovative ideas and disruptive solutions to real-world problems before a distinguished panel of alumni. The competition evaluates ideas based on innovation, feasibility, scalability, and impact, providing students with the opportunity to develop their strategic thinking and presentation skills. What makes this event even more exciting is the possibility of onspot funding of up to ₹50,000 for promising ideas. This creates a dynamic Shark Tank like  atmosphere where students not only receive critical feedback but can also get the chance to turn their ideas into reality with the support of experienced mentors and potential investors.
+        </p>
+          <a href="https://forms.gle/1gQuWvkMZRo3B9r99" target="_blank"><button class="register">REGISTER NOW</button></a>
+      </div>
+    </div>
+
+    <div id="CaseXpert_discription" class="popup" >
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>CaseXpert</h2>
+            <p> An intellectually stimulating event, CaseXpert, challenges students to analyze real world business models. Participants will be given complex case studies covering various domains such of business strategy, financial management, market expansion, and operational efficiency. They must work under time constraints to develop structured, well-reasoned anylitical presentation and present them before a panel of seasoned industry professionals and alumni. This competition is particularly beneficial for students aspiring to careers in consulting, management, and entrepreneurship, as it sharpens their analytical and decision-making skills. By engaging with business leaders and alumni from top firms, participants will gain firsthand exposure to the intricacies of corporate problem solving, making this an invaluable learning experience.
+            </p>
+            <a href="https://forms.gle/3ccpXT1QLNpB55Uk9" target="_blank"><button class="register">REGISTER NOW</button></a>
+        </div>
+      </div>
+
+    <div id="Linkedin_BootCamp_discription" class="popup" >
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Linkedin BootCamp</h2>
+            <p>Understanding the importance of professional branding in today's digital era, LinkedIn Bootcamp equips students with the knowledge and skills required to build an industry standard LinkedIn profile. This specialized workshop is designed to help students optimize their profiles, craft compelling headlines ,summaries while showcasing their achievements effectively. Alumni mentors provide guidance on leveraging LinkedIn for networking, job hunting, and professional growth. A well-structured LinkedIn profile is a powerful tool in the modern job market, and this bootcamp ensures that students stand out to recruiters and potential employers.
+            </p>
+            <a href="https://forms.gle/QDtpNEDfG2C13NT58" target="_blank"><button class="register">REGISTER NOW</button></a>
+        </div>
+    </div>
+    
+    <div id="CV_Review_Camp_discription" class="popup" >
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>CV Review Camp</h2>
+            <p> A strong resume is a student's gateway to internships, jobs, and higher studies, and the CV Review Camp offers a unique opportunity for students to receive one on one feedback on their resumes from alumni and industry professionals. Through personalized guidance, students learn how to structure their resumes according to current industry standards, making them more appealing to recruiters. The session covers key aspects such as ATS (Applicant Tracking System) optimization, clarity of content, and effective presentation. Alumni mentors, many of whom are hiring managers or work in top organizations will provide one on one guidance for resumes.
+            </p>
+            <a href="https://forms.gle/PiQBp6AXb2AXtoG49" target="_blank"><button class="register">REGISTER NOW</button></a>
+        </div>
+      </div>
+
+      <div id="Mock-En-Joy_discription" class="popup" >
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Mock-En-Joy</h2>
+            <p> To further prepare students for the recruitment process, Mock-En-Joy offers a realistic interview simulation experience. Conducted by alumni from tech as well as core industries, this event replicates actual placement and internship interviews, helping students develop confidence, articulation, and problem-solving skills. Participants will be going through both technical and HR interview like questioning, while receiving immediate feedback on their performance. Industry-specific interviewers provide insights into the latest hiring trends, behavioral and situational questions, and strategies for effectively structuring responses. By experiencing the pressure and expectations of real interviews in a supportive environment, students gain the confidence needed to excel in their placement and job interviews
+            </p>
+            <a href="https://forms.gle/qqjLzdFhusi2pNbS8 " target="_blank"><button class="register">REGISTER NOW</button></a>
+        </div>
+      </div>  
+
+    <div class="events-container" id="events">
+        <h1 id="event-name">Events</h1>
+        <div class="event-box" onclick="showPopup1()">
+            <div class="s-logo"><img src="master 2.0.png" class="event-logo m-pic" alt="Master's Talk">
+            </div>
+        </div>
+        <div class="event-box" onclick="showPopup2()">
+            <div class="s-logo"><img src="ideathon 2.0.png" class="event-logo m-pic" alt="Ideathon">
+            </div>
+        </div>
+
+        <div class="event-box" onclick="showPopup3()">
+            <div class="s-logo"><img src="CaseXpert.png" class="event-logo m-pic" alt="CaseXpert">
+            </div>
+        </div>
+
+        <div class="event-box" onclick="showPopup4()">
+            <div class="s-logo"><img src="LINKEDIN TEXT.png" class="event-logo m-pic" alt="Linkedin BootCamp">
+            </div>
+        </div>
+
+        <div class="event-box" onclick="showPopup5()">
+            <div class="s-logo"><img src="CVReview.png" class="event-logo m-pic" alt="CV Review Camp">
+            </div>
+        </div>
+
+        <div class="event-box" onclick="showPopup6()">
+            <div class="s-logo"><img src="mockenjoy.png" class="event-logo m-pic" alt="Mock-En-Joy">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        window.addEventListener('scroll', function () {
+            let scrollPosition = window.scrollY;
+            let bodyLogo = document.getElementById('body-logo');
+            let alumination = document.getElementById('alumination');
+            let downArrow = document.getElementsByClassName('down-arrow')[0];
+
+            if (scrollPosition > 10) {
+                alumination.style.opacity = '1';
+                alumination.style.transform = 'scale(1.7)';
+                downArrow.classList.add('hidden');
+            } else {
+                alumination.style.opacity = '0';
+                alumination.style.transform = 'scale(0.3)';
+                downArrow.classList.remove('hidden');
+            }
+        });
+
+        function showPopup1() {
+            document.querySelector("#Master_talk_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function showPopup2() {
+            document.querySelector("#Ideathon_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function showPopup3() {
+            document.querySelector("#CaseXpert_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function showPopup4() {
+            document.querySelector("#Linkedin_BootCamp_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function showPopup5() {
+            document.querySelector("#CV_Review_Camp_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function showPopup6() {
+            document.querySelector("#Mock-En-Joy_discription").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closePopup() {
+            document.querySelector("#Master_talk_discription").style.display = "none";
+            document.querySelector("#Ideathon_discription").style.display = "none";
+            document.querySelector("#CaseXpert_discription").style.display = "none";
+            document.querySelector("#Linkedin_BootCamp_discription").style.display = "none";
+            document.querySelector("#CV_Review_Camp_discription").style.display = "none";
+            document.querySelector("#Mock-En-Joy_discription").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+
+    <!-- Timeline section -->
+    <title>Timeline</title>
+    <style>
+        .timeline {
+            padding: 50px 20px;
+            position: relative;
+            min-height: auto;
+            overflow: visible;
+        }
+
+        .timeline h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 120px;
+            bottom: 0;
+            width: 4px;
+            background: #F8E9D2;
+            transform: translateX(-50%);
+        }
+
+        .timeline-line::before, .timeline-line::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #ffac66;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-line::before {
+            top: 0;
+        }
+
+        .timeline-line::after {
+            bottom: 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 40px 0;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .timeline-icon {
+            width: 10px;
+            height: 10px;
+            background: #ffac66;
+            transform: rotate(45deg);
+            border: 2px solid #F8E9D2;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        .timeline-content {
+            background: #0B0B0D;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #ffac66;
+            width: 280px;
+            text-align: left;
+            color: #F8E9D2;
+            margin-left: auto;
+            margin-right: 20%;
+        }
+
+        .timeline-piyush {
+            width: 200px;
+            height: 200px;
+            background: transparent;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            position: absolute;
+            left: 45%;
+            transform: translateX(-100%);
+        }
+
+        .timeline-piyush img {
+            width: 200px;
+            height: 200px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline-line {
+                left: 50px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 0;
+            }
+
+            .timeline-piyush {
+                position: relative;
+                left: 60px;
+                transform: none;
+                margin-bottom: 10px;
+            }
+
+            .timeline-icon {
+                position: relative;
+                left: 30px;
+                margin-bottom: 15px;
+            }
+
+            .timeline-content {
+                width: 210px;
+                text-align: left;
+                margin-left: 60px;
+            }
+        }
+    </style>
+
+    <!-- Timeline section with timeline items -->
+    <div class="timeline">
+        <h1>DAY 1</h1>
+        <div class="timeline-line"></div>
+
+        <!-- Timeline item 1 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Opening Ceremony [DM SEN]</p>
+                <p>⏰ 10:00 AM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 2 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 CaseXpert [DM SEN]</p>
+                <p>⏰ 10:30 AM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 3 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Mock-En-Joy (Mock Industry/IT interview by Alumni) [G Meet]</p>
+                <p>⏰ 2:00 PM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 4 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Linkedin BootCamp [Assembly Hall]</p>
+                <p>⏰ 2:30 PM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 5 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Ideathon [G Meet]</p>
+                <p>⏰ 4:00 PM </p>
+            </div>
+        </div>
+
+        <!-- Timeline item 6 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Masters’ Talk [DM SEN] </p>
+                <p>⏰ 6:00 PM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 7 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 .QnA session with Speaker [DM SEN] </p>
+                <p>⏰ 7:00 PM</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Timeline -->
+    <div class="timeline">
+        <h1>DAY 2</h1>
+        <div class="timeline-line"></div>
+
+        <!-- Timeline item 1 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 CaseXpert (Interview by Alumni) [DM SEN] </p>
+                <p>⏰ 10:00 AM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 2 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 CV Review Camp [Online Gmeet || Assembly hall] </p>
+                <p>⏰ 11:00 AM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 3 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Ideathon [ Checkpoint 2] [G MEET]</p>
+                <p>⏰ 2:00PM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 4 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Mock-En-Joy (Mock Industry/IT interview by Alumni) [Assembly Hall] </p>
+                <p>⏰2:30 PM</p>
+            </div>
+        </div>
+
+        <!-- Timeline item 5 -->
+        <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Masters' Talk [DM SEN]</p>
+                <p>⏰ 6:30PM</p>
+            </div>
+        </div>
+
+         <!-- Timeline item 6 -->
+         <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 QnA session with Speaker [DM SEN]</p>
+                <p>⏰ 7:30PM</p>
+            </div>
+        </div>
+
+         <!-- Timeline item 7 -->
+         <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Ideathon(Final presentations,Jury deliberations) + CaseXpert Results and Prize Distribution [DM SEN]</p>
+                <p>⏰ 8:00PM</p>
+            </div>
+        </div>
+
+         <!-- Timeline item 8 -->
+         <div class="timeline-item">
+            <div class="timeline-piyush">
+                <img src="alumination_poster_ 1 just logo.png" alt="Piyush" />
+            </div>
+            <div class="timeline-icon"></div>
+            <div class="timeline-content">
+                <p>📅 Closing of Alumination'25. [DM SEN]</p>
+                <p>⏰ 8:30PM</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JavaScript for timeline item visibility -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const timelineItems = document.querySelectorAll(".timeline-item");
+
+            function checkVisibility() {
+                const triggerBottom = window.innerHeight * 0.9;
+
+                timelineItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+
+                    if (itemTop < triggerBottom) {
+                        item.style.opacity = "1";
+                        item.style.transform = "scale(1)";
+                    } else {
+                        item.style.opacity = "0";
+                        item.style.transform = "scale(0.8)";
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", checkVisibility);
+            checkVisibility();
+        });
+    </script>
+</body>
+</html>
